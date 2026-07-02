@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерея | Тренировки</title>
+
+<style>
+
+/* ===== ОСНОВА ===== */
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#0f0f0f,#1c1c1c);
+    color:white;
+    text-align:center;
+}
+
+/* ===== ЗАГОЛОВОК ===== */
+
+h1{
+    margin:40px 0 10px;
+    font-size:32px;
+}
+
+h1::after{
+    content:"";
+    display:block;
+    width:80px;
+    height:3px;
+    background:#00c853;
+    margin:12px auto;
+    border-radius:2px;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:18px;
+    padding:20px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+/* ===== КАРТОЧКА ===== */
+
+.item{
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.45);
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeIn 0.6s forwards;
+}
+
+.item img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    object-position:50% 10%;;
+    transition:0.3s;
+    filter:brightness(0.95);
+}
+
+.item:hover img{
+    transform:scale(1.05);
+    filter:brightness(1.1);
+}
+
+/* подпись */
+.caption{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:10px;
+    background:rgba(0,0,0,0.6);
+    font-size:14px;
+}
+
+/* ===== КНОПКА ===== */
+
+.back{
+    display:inline-block;
+    margin:35px 0 100px;
+    padding:14px 34px;
+    background:linear-gradient(135deg,#00c853,#00a548);
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ===== FIXED BUTTON ===== */
+
+.fixed-btn{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#00c853;
+    padding:14px 28px;
+    border-radius:50px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 10px 25px rgba(0,200,83,.35);
+    z-index:1000;
+}
+
+/* ===== LIGHTBOX ===== */
+
+.lightbox{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:12px;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes fadeIn{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width:600px){
+    .item img{
+        height:200px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Фотографии тренера</h1>
+
+<div class="gallery">
+
+<div class="item" onclick="openImg(this)">
+    <img src="trainer1.jpg">
+    <div class="caption">Силовая тренировка</div>
+</div>
+
+<div class="item" onclick="openImg(this)">
+    <img src="trainer2.jpg">
+    <div class="caption">Работа с клиентом</div>
+</div>
+
+<div class="item" onclick="openImg(this)">
+    <img src="trainer3.jpg">
+    <div class="caption">Функциональный тренинг</div>
+</div>
+
+<div class="item" onclick="openImg(this)">
+    <img src="trainer4.jpg">
+    <div class="caption">Персональная программа</div>
+</div>
+
+</div>
+
+<a href="index.html" class="back">← Вернуться на главную</a>
+
+<a href="https://t.me/m/zTuforSAMGNi" class="fixed-btn">Записаться</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeImg()">
+    <img id="lightboxImg">
+</div>
+
+<script>
+
+function openImg(el){
+    const img = el.querySelector("img");
+    document.getElementById("lightboxImg").src = img.src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeImg(){
+    document.getElementById("lightbox").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
